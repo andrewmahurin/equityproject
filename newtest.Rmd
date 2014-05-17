@@ -1,0 +1,53 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+```
+
+```{r}
+with(fnda, indexplot(dailyhigh5, type='h', id.method='y', id.n=2, 
+  labels=rownames(fnda)))
+```
+
+```{r}
+densityPlot( ~ close, data=fnda, bw="SJ", adjust=1, kernel="gaussian")
+```
+
+```{r}
+densityPlot( ~ dailychange, data=fnda, bw="SJ", adjust=1, kernel="gaussian")
+```
+
+```{r}
+library(aplpack, pos=4)
+```
+
+```{r}
+stem.leaf(fnda$weeklylow, na.rm=TRUE)
+```
+
+```{r}
+qqPlot(fnda$dailyhigh, dist="norm", id.method="y", id.n=2, 
+  labels=rownames(fnda))
+```
+
+```{r}
+with(fnda, Hist(dailylow, scale="frequency", breaks="Sturges", 
+  col="darkgray"))
+```
+
+```{r}
+.x <- seq(0, 1, length.out=1000)
+plotDistr(.x, dunif(.x, min=0, max=1), cdf=FALSE, xlab="x", ylab="Density", 
+  main=paste("Uniform Distribution:  Minimum=0, Maximum=1"))
+remove(.x)
+```
+
